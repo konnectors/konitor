@@ -1,6 +1,7 @@
 # konitor
 
 [![license](https://img.shields.io/github/license/konnectors/konitor.svg?style=flat-square)](https://github.com/konnectors/konitor/blob/master/LICENSE)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fkonnectors%2Fkonitor.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fkonnectors%2Fkonitor?ref=badge_shield)
 
 > Tools to check health of konnectors
 
@@ -84,3 +85,7 @@ $ yarn start
 ## Inspiration
 
 - https://www.sitepoint.com/javascript-command-line-interface-cli-node-js/
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fkonnectors%2Fkonitor.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fkonnectors%2Fkonitor?ref=badge_large)
