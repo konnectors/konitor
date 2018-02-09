@@ -42,7 +42,7 @@
     "url": "https://github.com/konnectors/konitor.git"
   },
   "dependencies": {
-    "@octokit/rest": "14.0.8",
+    "@octokit/rest": "14.0.9",
     "chalk": "2.3.0",
     "clear": "0.0.1",
     "clui": "0.3.6",
