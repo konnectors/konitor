@@ -52,7 +52,7 @@
     "configstore": "3.1.2",
     "figlet": "1.2.0",
     "fs-extra": "5.0.0",
-    "inquirer": "5.1.0",
+    "inquirer": "5.2.0",
     "lodash": "4.17.5",
     "mkdirp": "0.5.1",
     "simple-git": "1.92.0",
