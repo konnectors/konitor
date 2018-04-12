@@ -20,6 +20,19 @@ If you cannot execute `konitor` after this command, it may be because you do not
 have the directory where `yarn` stores its symbolic links in your `PATH`. Edit
 it to append the result of `yarn global bin`.
 
+In case it still doesn't work (e.g. because for whatever reason the installed
+package doesn't have a `dist/` directory), you can build and install it locally:
+
+```
+$ git clone https://github.com/konnectors/konitor.git
+$ yarn
+$ yarn build
+$ yarn global add file:$PWD
+```
+
+You can also install the latest stable version with `yarn global add konitor`, but
+you may miss some recent changes.
+
 ## CLI
 
 - [Manpages of the command-line tool](./docs/cli.md)
