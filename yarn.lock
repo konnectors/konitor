@@ -738,7 +738,7 @@ babel-plugin-transform-exponentiation-operator@^6.22.0:
     babel-plugin-syntax-exponentiation-operator "^6.8.0"
     babel-runtime "^6.22.0"
 
-babel-plugin-transform-object-rest-spread@^6.26.0:
+babel-plugin-transform-object-rest-spread@6.26.0:
   version "6.26.0"
   resolved "https://registry.yarnpkg.com/babel-plugin-transform-object-rest-spread/-/babel-plugin-transform-object-rest-spread-6.26.0.tgz#0f36692d50fef6b7e2d4b3ac1478137a963b7b06"
   dependencies:
@@ -2909,7 +2909,7 @@ js-tokens@^3.0.0, js-tokens@^3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-3.0.2.tgz#9866df395102130e38f7f996bceb65443209c25b"
 
-js-yaml@^3.11.0, js-yaml@^3.7.0, js-yaml@^3.9.1:
+js-yaml@3.11.0, js-yaml@^3.7.0, js-yaml@^3.9.1:
   version "3.11.0"
   resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.11.0.tgz#597c1a8bd57152f26d622ce4117851a51f5ebaef"
   dependencies:
@@ -4432,9 +4432,9 @@ trim-right@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/trim-right/-/trim-right-1.0.1.tgz#cb2e1203067e0c8de1f614094b9fe45704ea6003"
 
-tty-table@2.5.9:
-  version "2.5.9"
-  resolved "https://registry.yarnpkg.com/tty-table/-/tty-table-2.5.9.tgz#1aaa76ca531e7689296897a7d170d44c1af1d7c1"
+tty-table@2.6.0:
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/tty-table/-/tty-table-2.6.0.tgz#a1e43c01ed16026fdfe75d7fbbd8af08fc3f0222"
   dependencies:
     chalk "^2.3.0"
     csv "^2.0.0"
