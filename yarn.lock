@@ -4457,9 +4457,9 @@ trim-right@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/trim-right/-/trim-right-1.0.1.tgz#cb2e1203067e0c8de1f614094b9fe45704ea6003"
 
-tty-table@2.6.2:
-  version "2.6.2"
-  resolved "https://registry.yarnpkg.com/tty-table/-/tty-table-2.6.2.tgz#f6082d41d44a01df4ddf9e4911681fcec3c8a5a8"
+tty-table@2.6.3:
+  version "2.6.3"
+  resolved "https://registry.yarnpkg.com/tty-table/-/tty-table-2.6.3.tgz#1e64f5083bfcc8796e0438e89b604874a95361dd"
   dependencies:
     chalk "^2.3.0"
     csv "^3.0.2"
