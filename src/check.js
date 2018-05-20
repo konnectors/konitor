@@ -90,9 +90,11 @@ const travisUsedToBuildAndDeploy = {
       return false
     }
 
-    const templateSecure = travis.env.global.filter(val =>
-      templateTravis.env.global.map(v => v.secure).includes(val.secure)
-    )
+    const templateSecure = travis.env.global
+      .filter(val => val.secure)
+      .filter(val => {
+        return templateTravis.env.global.map(v => v.secure).includes(val.secure)
+      })
     assert(
       templateSecure.length === 0,
       `No secure key from the connector template`
@@ -116,13 +118,6 @@ const travisUsedToBuildAndDeploy = {
             `${index}: deploy values should be the same as the template (but not the repo)`
           )
         })
-
-      assert(
-        deploy.repo === info.git.remote,
-        `${index}: Target repository should be ${info.git.remote} and not ${
-          deploy.repo
-        }`
-      )
     })
 
     return true
