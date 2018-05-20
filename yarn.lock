@@ -78,9 +78,9 @@
     lodash "^4.2.0"
     to-fast-properties "^2.0.0"
 
-"@octokit/rest@15.4.1":
-  version "15.4.1"
-  resolved "https://registry.yarnpkg.com/@octokit/rest/-/rest-15.4.1.tgz#73a63912ee984d04674b498cf8c3ff765776ed13"
+"@octokit/rest@15.6.1":
+  version "15.6.1"
+  resolved "https://registry.yarnpkg.com/@octokit/rest/-/rest-15.6.1.tgz#e19e745a8df4f30baba3d7659fb350d97991528b"
   dependencies:
     before-after-hook "^1.1.0"
     btoa-lite "^1.0.0"
