@@ -9,7 +9,8 @@ const lintedByEslintPrettier = {
     const eslintConfig = (info.pkg && info.pkg.eslintConfig) || info.eslintrc
     assert(
       eslintConfig &&
-        eslintConfig.extends.indexOf('eslint-config-cozy-app') > -1,
+        // eslint-config- can be ommitted
+        ['eslint-config-cozy-app', 'cozy-app'].includes(eslintConfig.extends),
       'eslintConfig should extend from prettier'
     )
   },
