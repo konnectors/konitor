@@ -6,17 +6,18 @@ import request from 'request-promise'
 
 const lintedByEslintPrettier = {
   fn: (info, assert) => {
-    const eslintConfig = info.pkg && info.pkg.eslintConfig
+    const eslintConfig = (info.pkg && info.pkg.eslintConfig) || info.eslintrc
     assert(
       eslintConfig &&
-        eslintConfig.extends.indexOf('eslint-config-cozy-app') > -1,
+        // eslint-config- can be ommitted
+        ['eslint-config-cozy-app', 'cozy-app'].includes(eslintConfig.extends),
       'eslintConfig should extend from prettier'
     )
   },
   nickname: 'eslint',
   link: 'https://github.com/konnectors/docs/blob/master/status.md#linting',
   message:
-    'Eslint with prettier is used to lint the code (check for eslintConfig in package.json)'
+    'Eslint with prettier is used to lint the code (check for eslintConfig in package.json or for an .eslintrc.json config file)'
 }
 
 const mandatoryFieldsInManifest = {
@@ -278,6 +279,14 @@ const prepareInfo = async repository => {
   const manifest = readJSON('manifest.konnector')
   const webpackConfig = read('webpack.config.js')
 
+  // Alternative configurations
+  let eslintrc
+  try {
+    eslintrc = readJSON('.eslintrc.json')
+  } catch (e) {
+    eslintrc = null
+  }
+
   // fetch template repository travis secure keys
   const templateTravisConfig = await request(
     'https://raw.githubusercontent.com/konnectors/cozy-konnector-template/master/.travis.yml'
@@ -288,6 +297,7 @@ const prepareInfo = async repository => {
     url: 'https://apps-registry.cozycloud.cc/registry'
   })
   return {
+    eslintrc,
     repository,
     pkg,
     manifest,
