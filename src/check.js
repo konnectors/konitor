@@ -11,7 +11,8 @@ const lintedByEslintPrettier = {
       eslintConfig &&
         // eslint-config- can be ommitted
         eslintConfig.extends.find(config =>
-          ['eslint-config-cozy-app', 'cozy-app'].includes(config)),
+          ['eslint-config-cozy-app', 'cozy-app'].includes(config)
+        ),
       'eslintConfig should extend from prettier'
     )
   },
