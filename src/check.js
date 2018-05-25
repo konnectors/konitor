@@ -1,8 +1,41 @@
+import JSON5 from 'json5'
 import path from 'path'
 import fs from 'fs'
 import yaml from 'js-yaml'
 import { exec } from 'child_process'
 import request from 'request-promise'
+
+const getWebpackCopyConfig = webpackConfigString => {
+  // Let's get the CopyPlugin() parameter ! (Or CopyWebpackPlugin(), depending
+  // on how contributors are naming their variables).
+  const matches = webpackConfigString.match(
+    /Copy(Webpack)?Plugin\(((.|[\r\n])*)\)/
+  )
+
+  // For sure you are a regexp master, so we don't need to explain why the
+  // parameter we need corresponds to the third match.
+  const webpackCopyConfigString = matches && matches[2]
+
+  let webpackCopyConfig
+
+  try {
+    // JSON5 parses relaxed JSON, no stress about double-quotes.
+    webpackCopyConfig =
+      webpackCopyConfigString && JSON5.parse(webpackCopyConfigString)
+  } catch (error) {
+    webpackCopyConfig = null
+  }
+
+  return {
+    copies: fileName => {
+      return (
+        !!webpackCopyConfig &&
+        (webpackCopyConfig.includes(fileName) || // shorthand
+          webpackCopyConfig.find(rule => rule.from === fileName)) // { from: file }
+      )
+    }
+  }
+}
 
 const lintedByEslintPrettier = {
   fn: (info, assert) => {
@@ -156,7 +189,7 @@ const assetsDirIsConfigured = {
       'The assets directory should exist'
     )
     assert(
-      info.webpackConfig.indexOf(`from: 'assets'`) > -1,
+      info.webpackCopyConfig.copies('assets'),
       'The assets directory should be configured in webpack'
     )
     const iconPath = path.join(info.repository, 'assets', info.manifest.icon)
@@ -280,6 +313,7 @@ const prepareInfo = async repository => {
   const pkg = readJSON('package.json')
   const manifest = readJSON('manifest.konnector')
   const webpackConfig = read('webpack.config.js')
+  const webpackCopyConfig = getWebpackCopyConfig(webpackConfig)
 
   // Alternative configurations
   let eslintrc
@@ -304,6 +338,7 @@ const prepareInfo = async repository => {
     pkg,
     manifest,
     webpackConfig,
+    webpackCopyConfig,
     templateTravisConfig,
     git: await prepareGitInfo(repository),
     applicationsInRegistry,
