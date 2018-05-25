@@ -203,6 +203,19 @@ const assetsDirIsConfigured = {
   message: 'The ./assets directory should exist and be configured in webpack'
 }
 
+const packageJsonIsConfigured = {
+  fn: (info, assert) => {
+    assert(
+      info.webpackCopyConfig.copies('package.json'),
+      "package.json should be copied in build/ directory by webpack. \
+      Use copy-webpack-plugin. Konitor looks for a call to 'new CopyPlugin()' \
+      or 'new CopyWebpackPlugin()'."
+    )
+  },
+  nickname: 'package.json',
+  message: 'The package.json should be configured in webpack'
+}
+
 const manifestAndPackageJsonSameVersion = {
   fn: (info, assert) => {
     assert(
@@ -290,7 +303,8 @@ const prepareGitInfo = async repository => {
 
 const mkAssert = res => (assertion, warning) => {
   if (!assertion) {
-    res.warnings.push(warning)
+    // trim inner spaces for multiline warnings
+    res.warnings.push(warning.replace(/(\s)+/g, ' '))
   }
 }
 
@@ -353,6 +367,7 @@ const checks = [
   travisUsedToBuildAndDeploy,
   renovateIsConfigured,
   assetsDirIsConfigured,
+  packageJsonIsConfigured,
   manifestAndPackageJsonSameVersion,
   connectorExistsInRegistry
 ]
