@@ -1,8 +1,41 @@
+import JSON5 from 'json5'
 import path from 'path'
 import fs from 'fs'
 import yaml from 'js-yaml'
 import { exec } from 'child_process'
 import request from 'request-promise'
+
+const getWebpackCopyConfig = webpackConfigString => {
+  // Let's get the CopyPlugin() parameter ! (Or CopyWebpackPlugin(), depending
+  // on how contributors are naming their variables).
+  const matches = webpackConfigString.match(
+    /Copy(Webpack)?Plugin\(((.|[\r\n])*)\)/
+  )
+
+  // For sure you are a regexp master, so we don't need to explain why the
+  // parameter we need corresponds to the third match.
+  const webpackCopyConfigString = matches && matches[2]
+
+  let webpackCopyConfig
+
+  try {
+    // JSON5 parses relaxed JSON, no stress about double-quotes.
+    webpackCopyConfig =
+      webpackCopyConfigString && JSON5.parse(webpackCopyConfigString)
+  } catch (error) {
+    webpackCopyConfig = null
+  }
+
+  return {
+    copies: fileName => {
+      return (
+        !!webpackCopyConfig &&
+        (webpackCopyConfig.includes(fileName) || // shorthand
+          webpackCopyConfig.find(rule => rule.from === fileName)) // { from: file }
+      )
+    }
+  }
+}
 
 const lintedByEslintPrettier = {
   fn: (info, assert) => {
@@ -11,7 +44,8 @@ const lintedByEslintPrettier = {
       eslintConfig &&
         // eslint-config- can be ommitted
         eslintConfig.extends.find(config =>
-          ['eslint-config-cozy-app', 'cozy-app'].includes(config)),
+          ['eslint-config-cozy-app', 'cozy-app'].includes(config)
+        ),
       'eslintConfig should extend from prettier'
     )
   },
@@ -155,7 +189,7 @@ const assetsDirIsConfigured = {
       'The assets directory should exist'
     )
     assert(
-      info.webpackConfig.indexOf(`from: 'assets'`) > -1,
+      info.webpackCopyConfig.copies('assets'),
       'The assets directory should be configured in webpack'
     )
     const iconPath = path.join(info.repository, 'assets', info.manifest.icon)
@@ -167,6 +201,19 @@ const assetsDirIsConfigured = {
   },
   nickname: 'assets',
   message: 'The ./assets directory should exist and be configured in webpack'
+}
+
+const packageJsonIsConfigured = {
+  fn: (info, assert) => {
+    assert(
+      info.webpackCopyConfig.copies('package.json'),
+      "package.json should be copied in build/ directory by webpack. \
+      Use copy-webpack-plugin. Konitor looks for a call to 'new CopyPlugin()' \
+      or 'new CopyWebpackPlugin()'."
+    )
+  },
+  nickname: 'package.json',
+  message: 'The package.json should be configured in webpack'
 }
 
 const manifestAndPackageJsonSameVersion = {
@@ -256,7 +303,8 @@ const prepareGitInfo = async repository => {
 
 const mkAssert = res => (assertion, warning) => {
   if (!assertion) {
-    res.warnings.push(warning)
+    // trim inner spaces for multiline warnings
+    res.warnings.push(warning.replace(/(\s)+/g, ' '))
   }
 }
 
@@ -279,6 +327,7 @@ const prepareInfo = async repository => {
   const pkg = readJSON('package.json')
   const manifest = readJSON('manifest.konnector')
   const webpackConfig = read('webpack.config.js')
+  const webpackCopyConfig = getWebpackCopyConfig(webpackConfig)
 
   // Alternative configurations
   let eslintrc
@@ -303,6 +352,7 @@ const prepareInfo = async repository => {
     pkg,
     manifest,
     webpackConfig,
+    webpackCopyConfig,
     templateTravisConfig,
     git: await prepareGitInfo(repository),
     applicationsInRegistry,
@@ -317,6 +367,7 @@ const checks = [
   travisUsedToBuildAndDeploy,
   renovateIsConfigured,
   assetsDirIsConfigured,
+  packageJsonIsConfigured,
   manifestAndPackageJsonSameVersion,
   connectorExistsInRegistry
 ]
