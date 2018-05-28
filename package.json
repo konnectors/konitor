@@ -66,7 +66,7 @@
     "js-yaml": "3.11.0",
     "lodash": "4.17.10",
     "mkdirp": "0.5.1",
-    "request": "2.86.0",
+    "request": "2.87.0",
     "request-promise": "4.2.2",
     "simple-git": "1.92.0",
     "tty-table": "2.6.3",
