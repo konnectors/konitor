@@ -203,6 +203,20 @@ const assetsDirIsConfigured = {
   message: 'The ./assets directory should exist and be configured in webpack'
 }
 
+const travisConfigisCopied = {
+  fn: (info, assert) => {
+    assert(
+      info.webpackCopyConfig.copies('.travis.yml'),
+      ".travis.yml should be copied in build/ directory by webpack. Or else you will get build \
+      error when travis will try to build the build branch \
+      Use copy-webpack-plugin. Konitor looks for a call to 'new CopyPlugin()' \
+      or 'new CopyWebpackPlugin()'."
+    )
+  },
+  nickname: '.travis.yml',
+  message: 'The .travis.yml should be configured in webpack'
+}
+
 const packageJsonIsConfigured = {
   fn: (info, assert) => {
     assert(
@@ -368,6 +382,7 @@ const checks = [
   renovateIsConfigured,
   assetsDirIsConfigured,
   packageJsonIsConfigured,
+  travisConfigisCopied,
   manifestAndPackageJsonSameVersion,
   connectorExistsInRegistry
 ]
