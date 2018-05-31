@@ -244,16 +244,23 @@ const manifestAndPackageJsonSameVersion = {
 }
 
 const connectorExistsInRegistry = {
-  fn: (info, assert) => {
+  fn: async (info, assert) => {
+    let result = false
+    try {
+      await request(
+        `https://apps-registry.cozycloud.cc/registry/${info.manifest.slug}`
+      )
+      result = true
+    } catch (err) {
+      result = false
+    }
     assert(
-      info.applicationsInRegistry.data.find(
-        app => app.slug === info.manifest.slug
-      ) !== undefined,
+      result,
       `The connector with the slug ${
         info.manifest.slug
       } should exist in the registry`
     )
-    return true
+    return result
   },
   nickname: 'registry',
   message: 'The connector must exist in the registry'
@@ -356,10 +363,6 @@ const prepareInfo = async repository => {
     'https://raw.githubusercontent.com/konnectors/cozy-konnector-template/master/.travis.yml'
   )
 
-  const applicationsInRegistry = await request({
-    json: true,
-    url: 'https://apps-registry.cozycloud.cc/registry'
-  })
   return {
     eslintrc,
     repository,
@@ -369,7 +372,6 @@ const prepareInfo = async repository => {
     webpackCopyConfig,
     templateTravisConfig,
     git: await prepareGitInfo(repository),
-    applicationsInRegistry,
     read
   }
 }
