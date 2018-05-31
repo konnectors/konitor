@@ -38,3 +38,14 @@ export const getSlug = async path => {
 
   return manifest.slug
 }
+
+/*
+ * Get the doctype for each permission
+ */
+export const getDoctypes = async path => {
+  const manifest = await getManifest(path)
+
+  return Object.values(manifest.permissions)
+    .map(perm => perm.type)
+    .filter(doctype => !['io.cozy.files', 'io.cozy.accounts'].includes(doctype))
+}

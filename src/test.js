@@ -1,6 +1,6 @@
 import { getKonnectorField, setKonnectorField } from './helpers/config'
 import { hasCmd, launchCmd } from './helpers/package'
-import { getFields, getSlug } from './helpers/manifest'
+import { getFields, getSlug, getDoctypes } from './helpers/manifest'
 import { getFilesFromDir } from './helpers/filesystem'
 import { askKonnectorField } from './helpers/questions'
 import { pull } from './pulls'
@@ -80,11 +80,27 @@ export const testKonnector = async (config, konnector) => {
   } else {
     console.log(` - ⚠️  Login failed.`)
   }
-  const files = await getFilesFromDir(path, 'PDF')
+  const files = await getFilesFromDir(`${path}/data/`, 'PDF')
   if (files.length > 0) {
     console.log(` - ✅  PDF is imported.`)
   } else {
     console.log(` - ⚠️  No PDF.`)
+    result.code = 1
+  }
+
+  const doctypes = await getDoctypes(path)
+  const hasBillPermission = doctypes.includes('io.cozy.bills')
+  const IMPORTED_DATA_FILE = require('path').resolve('./data/importedData.json')
+  if (hasBillPermission && fs.existsSync(IMPORTED_DATA_FILE)) {
+    const bills = (await fs.readJson(IMPORTED_DATA_FILE)).map(
+      doc => (doc.doctype = 'io.cozy.bills')
+    )
+    if (bills.length > 0) {
+      console.log(` - ✅  Bills are imported.`)
+    } else {
+      console.log(` - ⚠️  No Bill`)
+      result.code = 1
+    }
   }
 
   // clean
