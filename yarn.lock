@@ -4539,9 +4539,9 @@ tslib@^1.9.0:
   version "1.9.2"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.9.2.tgz#8be0cc9a1f6dc7727c38deb16c2ebd1a2892988e"
 
-tty-table@2.6.4:
-  version "2.6.4"
-  resolved "https://registry.yarnpkg.com/tty-table/-/tty-table-2.6.4.tgz#7fa9278614d29d2eacf341a2f831c4d5b1168ac2"
+tty-table@2.6.7:
+  version "2.6.7"
+  resolved "https://registry.yarnpkg.com/tty-table/-/tty-table-2.6.7.tgz#336e596c0db7912d963ff4b794fc9e9c65c83218"
   dependencies:
     chalk "^2.3.0"
     csv "^3.0.2"
