@@ -70,7 +70,7 @@
     "request": "2.87.0",
     "request-promise": "4.2.2",
     "simple-git": "1.96.0",
-    "tty-table": "2.6.7",
+    "tty-table": "2.6.8",
     "yargs": "11.1.0"
   },
   "devDependencies": {
