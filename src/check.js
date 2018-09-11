@@ -9,7 +9,7 @@ const getWebpackCopyConfig = webpackConfigString => {
   // Let's get the CopyPlugin() parameter ! (Or CopyWebpackPlugin(), depending
   // on how contributors are naming their variables).
   const matches = webpackConfigString.match(
-    /Copy(Webpack)?Plugin\(((.|[\r\n])*)\)/
+    /Copy(Webpack)?Plugin\((([^)]|[\r\n])*)\)/
   )
 
   // For sure you are a regexp master, so we don't need to explain why the
@@ -18,11 +18,24 @@ const getWebpackCopyConfig = webpackConfigString => {
 
   let webpackCopyConfig
 
+  // As we would like to give webpackConfigString to JSON5 to parse it, we
+  // cannot have function name in the config JSON object. But it can happen,
+  // for example with optimizeSVGIcon. So we lookf for strings like
+  // "transform: optimizeSVGIcon" to change them to
+  // "transform: 'optimizeSVGIcon'". That was the following regexp
+  // unescapedJSONParamRegexp is for.
+  const unescapedJSONParamRegexp = /([^\s.]*):\s?([^'\s,}].*[^\s,}])/
+  const sanitizedWebpackCopyConfigString =
+    webpackCopyConfigString &&
+    webpackCopyConfigString.replace(unescapedJSONParamRegexp, "$1: '$2'")
+
   try {
     // JSON5 parses relaxed JSON, no stress about double-quotes.
     webpackCopyConfig =
-      webpackCopyConfigString && JSON5.parse(webpackCopyConfigString)
+      sanitizedWebpackCopyConfigString &&
+      JSON5.parse(sanitizedWebpackCopyConfigString)
   } catch (error) {
+    console.error(error.message)
     webpackCopyConfig = null
   }
 
