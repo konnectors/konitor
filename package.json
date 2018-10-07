@@ -79,7 +79,7 @@
     "babel-preset-env": "1.7.0",
     "eslint": "4.19.1",
     "eslint-config-cozy-app": "0.10.0",
-    "husky": "0.14.3",
+    "husky": "1.1.1",
     "jest": "23.6.0"
   }
 }
