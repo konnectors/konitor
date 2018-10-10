@@ -8,6 +8,7 @@ import { pulls } from './pulls'
 import { testKonnector } from './test'
 import { getKonnector, getKonnectorFromPath, getKonnectors } from './list'
 import checkGuidelines from './check'
+import checkLibs from './checkLibs'
 
 // simple-git supposes that git is in english or else won't work
 process.env.LANG = 'en'
@@ -93,6 +94,15 @@ yargs // eslint-disable-line no-unused-expressions
     desc: 'Do some prepublish test on a list of paths',
     handler: async options => {
       const code = await checkGuidelines(options)
+      process.exit(code)
+    }
+  })
+  .command({
+    command: 'checkLibs',
+    desc:
+      'Checks if cozy-konnector-libs is updated on the whole list of connectors from the registry',
+    handler: async options => {
+      const code = await checkLibs(options)
       process.exit(code)
     }
   })
