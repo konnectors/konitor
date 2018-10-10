@@ -1490,10 +1490,10 @@ concat-map@0.0.1:
   resolved "https://registry.yarnpkg.com/concat-map/-/concat-map-0.0.1.tgz#d8a96bd77fd68df7793a73036a3ba0d5405d477b"
   integrity sha1-2Klr13/Wjfd5OnMDajug1UBdR3s=
 
-configstore@3.1.2:
-  version "3.1.2"
-  resolved "https://registry.yarnpkg.com/configstore/-/configstore-3.1.2.tgz#c6f25defaeef26df12dd33414b001fe81a543f8f"
-  integrity sha512-vtv5HtGjcYUgFrXc6Kx747B83MRRVS5R1VTEQoXvuP+kMI+if6uywV0nDGoiydJRy4yk7h9od5Og0kxx4zUXmw==
+configstore@4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/configstore/-/configstore-4.0.0.tgz#5933311e95d3687efb592c528b922d9262d227e7"
+  integrity sha512-CmquAXFBocrzaSM8mtGPMM/HiWmyIpr4CcJl/rgY2uCObZ/S7cKU0silxslqJejl+t/T9HS8E0PUNQD81JGUEQ==
   dependencies:
     dot-prop "^4.1.0"
     graceful-fs "^4.1.2"
@@ -2362,10 +2362,10 @@ fb-watchman@^2.0.0:
   dependencies:
     bser "^2.0.0"
 
-figlet@1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/figlet/-/figlet-1.2.0.tgz#6c46537378fab649146b5a6143dda019b430b410"
-  integrity sha1-bEZTc3j6tkkUa1phQ92gGbQwtBA=
+figlet@1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/figlet/-/figlet-1.2.1.tgz#48d35df9d9b10b1b3888302e6e57904a0b00509c"
+  integrity sha512-qc8gycfnnfOmfvPl7Fi3JeTbcvdmbZkckyUVGGAM02je7Ookvu+bBfKy1I4FKqTsQHCs3ARJ76ip/k98r+OQuQ==
 
 figures@^2.0.0:
   version "2.0.0"
@@ -2877,10 +2877,10 @@ https-proxy-agent@^2.2.0:
     agent-base "^4.1.0"
     debug "^3.1.0"
 
-husky@1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/husky/-/husky-1.1.0.tgz#7271e85f5d98b54349788839b720c9a60cd95dba"
-  integrity sha512-jnUD0PK3xGLB5Jc3f3UEwl8qOZeLd0WiWABhVyHPS5R298HOccGZJMOMBSk3gFksAa1BeK9FQYYEfPNlqkfBxg==
+husky@1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/husky/-/husky-1.1.1.tgz#7179043184f68a4d1ffc975cbd1c6132ef1fd7b3"
+  integrity sha512-D8ly8eIZdWzWVG4mh4apaX1PP47uLSaN8CS0RyuuLtHJ20Gt6Ccky5pSecaPsqxNzQj0zon3x6QX/0kCc5/TOQ==
   dependencies:
     cosmiconfig "^5.0.6"
     execa "^0.9.0"
