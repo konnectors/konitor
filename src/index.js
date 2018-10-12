@@ -98,7 +98,7 @@ yargs // eslint-disable-line no-unused-expressions
     }
   })
   .command({
-    command: 'checkLibs',
+    command: 'checkLibs <channel>',
     desc:
       'Checks if cozy-konnector-libs is updated on the whole list of connectors from the registry',
     handler: async options => {

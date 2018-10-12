@@ -4,11 +4,11 @@ import _ from 'lodash'
 import { execSync } from 'child_process'
 import chalk from 'chalk'
 
-const checkLibs = async () => {
+const checkLibs = async channel => {
   let result = 0
 
   const lastLibsVersion = getLastLibsVersion()
-  const connectors = await getLibsVersions()
+  const connectors = await getLibsVersions(channel)
 
   for (const connector of connectors) {
     const ok = lastLibsVersion === connector.libVersion
@@ -35,21 +35,34 @@ function getLastLibsVersion() {
   return version
 }
 
-async function getLibsVersions() {
+async function getLibsVersions(channel) {
   const connectorsRegistry = (await request.get(
     'https://apps-registry.cozycloud.cc/registry?limit=10000',
     { json: true }
   )).data.filter(repo => repo.latest_version && repo.type === 'konnector')
 
   const versions = []
-  for (const connector of connectorsRegistry) {
-    const { version, source } = connector.latest_version.manifest
+  for (const connector of connectorsRegistry.slice(0, 10)) {
+    let version = connector.versions[channel].pop()
+    const registryDetails = await request.get(
+      `https://apps-registry.cozycloud.cc/registry/${
+        connector.slug
+      }/${version}`,
+      { json: true }
+    )
+    const source = registryDetails.manifest.source
+    version = registryDetails.manifest.version
+    const hash = registryDetails.url
+      .split('/')
+      .pop()
+      .split('.')
+      .shift()
     if (!source) {
       console.error(connector.slug, 'not found')
       continue
     }
     const { owner, name } = gitParser(source)
-    const config = await fetchPackageJson(owner, name, version)
+    const config = await fetchPackageJson(owner, name, hash)
     const libVersion = config
       ? config.dependencies['cozy-konnector-libs']
       : 'not found'
@@ -63,26 +76,15 @@ async function getLibsVersions() {
   })
 }
 
-async function fetchPackageJson(organization, project, version) {
+async function fetchPackageJson(organization, project, hash) {
   let config
-  try {
-    config = await request(
-      `https://raw.githubusercontent.com/${organization}/${project}/${version}/package.json`,
-      { json: true }
-    )
-  } catch (err) {
-    try {
-      config = await request(
-        `https://raw.githubusercontent.com/${organization}/${project}/v${version}/package.json`,
-        { json: true }
-      )
-    } catch (err) {
-      return false
-    }
-  }
+  config = await request(
+    `https://raw.githubusercontent.com/${organization}/${project}/${hash}/package.json`,
+    { json: true }
+  )
   return config
 }
 
 export default function(options) {
-  return checkLibs(options.repositories)
+  return checkLibs(options.channel)
 }
