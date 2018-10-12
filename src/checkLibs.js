@@ -3,6 +3,7 @@ import gitParser from 'git-url-parse'
 import _ from 'lodash'
 import { execSync } from 'child_process'
 import chalk from 'chalk'
+import { getConnectors, getConnector } from './helpers/registry'
 
 const checkLibs = async channel => {
   let result = 0
@@ -15,7 +16,9 @@ const checkLibs = async channel => {
     if (!ok) result = 1
     let color = ok ? chalk.green : chalk.red
 
-    const version = connector.libVersion.split('.').map(Number)
+    const version = connector.libVersion
+      ? connector.libVersion.split('.').map(Number)
+      : 0
     const libVersion = lastLibsVersion.split('.').map(Number)
     if (!ok && version[0] === libVersion[0] && version[1] === libVersion[1]) {
       color = chalk.yellow
@@ -36,52 +39,60 @@ function getLastLibsVersion() {
 }
 
 async function getLibsVersions(channel) {
-  const connectorsRegistry = (await request.get(
-    'https://apps-registry.cozycloud.cc/registry?limit=10000',
-    { json: true }
-  )).data.filter(repo => repo.latest_version && repo.type === 'konnector')
+  const connectorsRegistry = await getConnectors()
 
   const versions = []
-  for (const connector of connectorsRegistry.slice(0, 10)) {
-    let version = connector.versions[channel].pop()
-    const registryDetails = await request.get(
-      `https://apps-registry.cozycloud.cc/registry/${
-        connector.slug
-      }/${version}`,
-      { json: true }
-    )
-    const source = registryDetails.manifest.source
-    version = registryDetails.manifest.version
-    const hash = registryDetails.url
-      .split('/')
-      .pop()
-      .split('.')
-      .shift()
+  for (const connector of connectorsRegistry) {
+    if (!connector.versions[channel]) {
+      console.error(connector.slug, 'not found')
+      continue
+    }
+    const longVersion = connector.versions[channel].pop()
+    const registryDetails = await getConnector(connector.slug, longVersion)
+    const source = registryDetails.manifest
+      ? registryDetails.manifest.source
+      : false
+    const gitHash = registryDetails.url
+      ? registryDetails.url
+          .split('/')
+          .pop()
+          .split('.')
+          .shift()
+      : false
     if (!source) {
       console.error(connector.slug, 'not found')
       continue
     }
     const { owner, name } = gitParser(source)
-    const config = await fetchPackageJson(owner, name, hash)
+    const config = await fetchPackageJson(owner, name, gitHash)
     const libVersion = config
-      ? config.dependencies['cozy-konnector-libs']
+      ? config &&
+        config.dependencies &&
+        config.dependencies['cozy-konnector-libs']
       : 'not found'
 
     versions.push({ slug: connector.slug, libVersion })
   }
 
-  return _.sortBy(versions, connector => {
-    const v = connector.libVersion.split('.').map(Number)
-    return v[0] * 10000 + v[1] * 100 + v[2]
-  })
+  return _.sortBy(versions, semVerSort)
 }
 
-async function fetchPackageJson(organization, project, hash) {
-  let config
-  config = await request(
-    `https://raw.githubusercontent.com/${organization}/${project}/${hash}/package.json`,
-    { json: true }
-  )
+function semVerSort(connector) {
+  if (!connector.libVersion) return 0
+  const v = connector.libVersion.split('.').map(Number)
+  return v[0] * 10000 + v[1] * 100 + v[2]
+}
+
+async function fetchPackageJson(organization, project, gitHash) {
+  let config = {}
+  try {
+    config = await request(
+      `https://raw.githubusercontent.com/${organization}/${project}/${gitHash}/package.json`,
+      { json: true }
+    )
+  } catch (err) {
+    // not found
+  }
   return config
 }
 

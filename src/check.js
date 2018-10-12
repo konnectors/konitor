@@ -4,6 +4,7 @@ import fs from 'fs'
 import yaml from 'js-yaml'
 import { exec } from 'child_process'
 import request from 'request-promise'
+import { getConnector } from './helpers/registry'
 
 const getWebpackCopyConfig = webpackConfigString => {
   // Let's get the CopyPlugin() parameter ! (Or CopyWebpackPlugin(), depending
@@ -260,9 +261,7 @@ const connectorExistsInRegistry = {
   fn: async (info, assert) => {
     let result = false
     try {
-      await request(
-        `https://apps-registry.cozycloud.cc/registry/${info.manifest.slug}`
-      )
+      await getConnector(info.manifest.slug)
       result = true
     } catch (err) {
       result = false
