@@ -5279,10 +5279,10 @@ signal-exit@^3.0.0, signal-exit@^3.0.2:
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.2.tgz#b5fdc08f1287ea1178628e415e25132b73646c6d"
   integrity sha1-tf3AjxKH6hF4Yo5BXiUTK3NkbG0=
 
-simple-git@1.104.0:
-  version "1.104.0"
-  resolved "https://registry.yarnpkg.com/simple-git/-/simple-git-1.104.0.tgz#c2081564d0045c9d121d321a0df0c5eea9a421b1"
-  integrity sha512-KTELLFyhLhN1qZGQkglx1e0YezYKNabCY4oKrTVb9y0BllkWwruK2qFCQDm2zpT7rE4IPd4/hzZt/6+0ykQIdA==
+simple-git@1.105.0:
+  version "1.105.0"
+  resolved "https://registry.yarnpkg.com/simple-git/-/simple-git-1.105.0.tgz#c4dcd903e8892b34d1ec73a6d965157642eaa2ad"
+  integrity sha512-ZrGcCPRIKCm6Q8gNJ+gx+leHqaokKpXae6K9lZpVD4sfeA2/rVvxcIR4KVVujNOmA6wHE2xaQ0GQWuIY88o6pA==
   dependencies:
     debug "^4.0.1"
 
