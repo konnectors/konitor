@@ -2,20 +2,20 @@ language: node_js
 matrix:
   fast_finish: true
 node_js:
-  - 8
+- 8
 cache:
   yarn: true
   directories:
-    - node_modules
+  - node_modules
 script:
-  - yarn test
-  - yarn build
+- yarn test
+- yarn build
 deploy:
   provider: npm
-  email: npm@fafaru.com
+  email: npm@cozycloud.cc
   skip_cleanup: true
   api_key:
-    secure: ZKh/m4/V8U+MdTr1iBrENDspgial5nP79kuChk4B54pwNzK7gyufLxOzrwke8p0CmptTa2t+al4Uf8QdPswotCkLaZ2qCAQ/37PrUQ7Kmk9ZWU43P4+7uVivXbNzk4TvCAIdWVOLRcv8cIPHpt55ILLeoCgXtoVXbQzYv9PxE1ysTA27rdfG6KvT39oNZzcMQzCqRXrw12oa9Fid1+TA8EOlE02xl6vWGntCV+wSKlApUllQrxceErsFnAPd/2FbOqp/rJfYW07tiaTA6ktsr1S8xa/8tu+4ouJ1ehCM3Q48zYNDrv6g8QAYA+1Lo27S9r3CHSDnUs1WxJhWO+Cp+Hj5wiLIta9ic/ZXfejMgn9vxP+Gm9cICGG6P1C7T+fZxKx73sLM0X8ScKFpUmP9TrhBZTb8oGXJ7B1Rp9fFyOpiODG8wTD8OYJCG4gTPiNcVWb+yFf0ph0/AL4KrvsHkJXDjc878opnZk6xlH+XQ9Q0+eJOVbrzvDAdzlbI0ovoJPCSSbzFUJBsopUGLiN11lUxLGVMyuFpJzqv3ZPRyH6Ng2vILK/gT721c4+us8p4tl5LmYpCiVIg7cFqqKtC6pySuOqX3S2nVlPJr7kq5GLGTT1z7j/4Uct7hGGxiphGQ9OCbbz+pk3WrC4gu5o48g9Lj4rCe+E7oSKPXBEku6I=
+    secure: Uulm6pcJIJeIIyircLSF3O4AGmmlaojQhgC7DD2SlcYXAYAm8iUhDEC+FANMunAjWBTTzlqaO9IOpRKbUGrYZKt64GMrleS320ZH3iyBAk6QaZ0vs6ko5OkxizjpjXZZqd15FQn1kQXfbTAYy7A5ganwcWJNIx/Rz947DMsnTcWk76Ihbak+YPBX9eWisl+MGueFyGzng/JVuerV2DPnHYi8GdqxuldIX8KSLtBXMFu0CU/hVQdE4ktszK5ZmLK8/gza5JJyUo7fIRDabO51mJ3AfJtBWSzSQ+5F76iHGeQHxbo/9bAy9Ss5zfC+dArdSkQwOEmo4i2+Zc9ZNRjSjyHYtMGzHqwMOnWZi48p/TeQwP1Zua0RusKTEtsrnO167uF7nk6IXeOGp9kT2PrJ1fj704AkyO0YM3YGOZdcHi1anQYKlg512KTd7kSXptVlEyDBSpVN2EEfB8T7PtH96V5MPsQbLqh6hO0WjiDir0RvrR33jKsZ0emm0q+0XYi5cSE4lbn9tru36lKHhqMCQQ4bVZtdS/FiKjzWYi1+L+3iCYNK8DMeyq/4Xh8QusxjmbF817OFR57Rvq8pzrdkWHlmJfYvjjzGW5hm9fwJEP7B04fqSTa4X7LCSPlmTIHKgoQDMqELXRXoseCaQedLWVqpRM2jYN6p6H3p1ZPGiW8=
   on:
     tags: true
     repo: konnectors/konitor
