@@ -74,7 +74,7 @@ async function getLibsVersions(channel) {
     versions.push({ slug: connector.slug, libVersion })
   }
 
-  return _.sortBy(versions, semVerSort)
+  return _.sortBy(versions, semVerSort).reverse()
 }
 
 function semVerSort(connector) {
