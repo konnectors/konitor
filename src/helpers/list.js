@@ -1,6 +1,6 @@
 import { includes } from 'lodash'
-import request from 'request-promise'
 import gitParser from 'git-url-parse'
+import { getConnectors } from './registry'
 
 const PROVIDER_GITHUB = 'github.com'
 const PROVIDER_GITLAB = 'gitlab.cozycloud.cc'
@@ -16,11 +16,8 @@ export const parsingRepository = url => {
 }
 
 export const getRepositories = async (provider = '') => {
-  const repos = (await request.get(
-    'https://apps-registry.cozycloud.cc/registry?limit=10000',
-    { json: true }
-  )).data
-    .filter(repo => repo.latest_version && repo.type === 'konnector')
+  const repos = (await getConnectors()).data
+    .filter(repo => repo.latest_version)
     .map(repo => repo.latest_version.manifest.source.split('#').shift())
   const list = []
 
