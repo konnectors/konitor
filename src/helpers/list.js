@@ -16,7 +16,7 @@ export const parsingRepository = url => {
 }
 
 export const getRepositories = async (provider = '') => {
-  const repos = (await getConnectors()).data
+  const repos = (await getConnectors())
     .filter(repo => repo.latest_version)
     .map(repo => repo.latest_version.manifest.source.split('#').shift())
   const list = []
