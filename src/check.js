@@ -81,7 +81,6 @@ const mandatoryFieldsInManifest = {
       'editor',
       'vendor_link',
       'categories',
-      'fields',
       'data_types',
       'permissions',
       'developer',
@@ -101,17 +100,6 @@ const mandatoryFieldsInManifest = {
   },
   nickname: 'manifestAttributes',
   message: 'Mandatory attributes are defined in manifest.konnector'
-}
-
-const hasFieldsInManifest = {
-  fn: (info, assert) => {
-    const fields = info.manifest && info.manifest.fields
-    const oldFormat = fields && fields.account && fields.account.accountFormat
-    assert(!oldFormat, 'The fields should not be in old format')
-    return Boolean(fields)
-  },
-  nickname: 'fields',
-  message: 'Fields (necessary for login) are defined in manifest.konnector'
 }
 
 const travisUsedToBuildAndDeploy = {
@@ -390,7 +378,6 @@ const prepareInfo = async repository => {
 
 const checks = [
   lintedByEslintPrettier,
-  hasFieldsInManifest,
   mandatoryFieldsInManifest,
   travisUsedToBuildAndDeploy,
   renovateIsConfigured,
