@@ -103,10 +103,10 @@
     lodash "^4.2.0"
     to-fast-properties "^2.0.0"
 
-"@octokit/rest@15.18.0":
-  version "15.18.0"
-  resolved "https://registry.yarnpkg.com/@octokit/rest/-/rest-15.18.0.tgz#e6de702b57dec94c71e806f1cff0ecb9725b3054"
-  integrity sha512-D1dDJMbvT4dok9++vc8uwCr92ndadwfz6vHK+IklzBHKSsuLlhpv2/dzx97Y4aRlm0t74LeXKDp4j0b4M2vmQw==
+"@octokit/rest@15.18.1":
+  version "15.18.1"
+  resolved "https://registry.yarnpkg.com/@octokit/rest/-/rest-15.18.1.tgz#ec7fb0f8775ef64dc095fae6635411d3fbff9b62"
+  integrity sha512-g2tecjp2TEtYV8bKAFvfQtu+W29HM7ektmWmw8zrMy9/XCKDEYRErR2YvvhN9+IxkLC4O3lDqYP4b6WgsL6Utw==
   dependencies:
     before-after-hook "^1.1.0"
     btoa-lite "^1.0.0"
