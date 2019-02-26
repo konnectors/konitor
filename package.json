@@ -64,7 +64,7 @@
     "fs-extra": "7.0.1",
     "git-url-parse": "10.1.0",
     "inquirer": "6.2.2",
-    "js-yaml": "3.12.1",
+    "js-yaml": "3.12.2",
     "json5": "2.1.0",
     "lodash": "4.17.11",
     "mkdirp": "0.5.1",
