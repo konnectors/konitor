@@ -141,22 +141,24 @@
     universal-user-agent "^2.0.1"
     url-template "^2.0.8"
 
-"@octokit/request@2.4.0":
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/@octokit/request/-/request-2.4.0.tgz#729fc5ea7654ab7cb74e0ae1935f69462a33b5e6"
-  integrity sha512-Bm2P0duVRUeKhyepNyFg5GX+yhCK71fqdtpsw5Rz+PQPjSha8HYwPMF5QfpzpD8b6/Xl3xhTgu3V90W362gZ1A==
+"@octokit/request@2.4.1":
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/@octokit/request/-/request-2.4.1.tgz#98c4d6870e4abe3ccdd2b9799034b4ae3f441c30"
+  integrity sha512-nN8W24ZXEpJQJoVgMsGZeK9FOzxkc39Xn9ykseUpPpPMNEDFSvqfkCeqqKrjUiXRm72ubGLWG1SOz0aJPcgGww==
   dependencies:
     "@octokit/endpoint" "^3.1.1"
+    deprecation "^1.0.1"
     is-plain-object "^2.0.4"
     node-fetch "^2.3.0"
+    once "^1.4.0"
     universal-user-agent "^2.0.1"
 
-"@octokit/rest@16.16.4":
-  version "16.16.4"
-  resolved "https://registry.yarnpkg.com/@octokit/rest/-/rest-16.16.4.tgz#c168cd14d7b9e43074d0e5b091e5a8d66b924610"
-  integrity sha512-9Itw0hQgEf26hg4IOsI7HYKbJBRYaTAAD0pA9ZxXyXjzTUU36Wx+EWkl8w4PNSdX2/79Ggdl6ekD5z1h3jyc7A==
+"@octokit/rest@16.16.5":
+  version "16.16.5"
+  resolved "https://registry.yarnpkg.com/@octokit/rest/-/rest-16.16.5.tgz#2427fe2d8ef7887731ac6fcf86f90136f1007a7a"
+  integrity sha512-R7SD1DUUJVwNuiJWYiIYOm20Q/MFObN48o4BLnfhkzn4ArENWe4Vl5YOvVRZIC0vHGoYCgRtKhzBA6/WOjE/ig==
   dependencies:
-    "@octokit/request" "2.4.0"
+    "@octokit/request" "2.4.1"
     before-after-hook "^1.4.0"
     btoa-lite "^1.0.0"
     lodash.get "^4.4.2"
@@ -1724,6 +1726,11 @@ delegates@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/delegates/-/delegates-1.0.0.tgz#84c6e159b81904fdca59a0ef44cd870d31250f9a"
   integrity sha1-hMbhWbgZBP3KWaDvRM2HDTElD5o=
+
+deprecation@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/deprecation/-/deprecation-1.0.1.tgz#2df79b79005752180816b7b6e079cbd80490d711"
+  integrity sha512-ccVHpE72+tcIKaGMql33x5MAjKQIZrk+3x2GbJ7TeraUCZWHoT+KSZpoC+JQFsUBlSTXUrBaGiF0j6zVTepPLg==
 
 detect-indent@^4.0.0:
   version "4.0.0"
