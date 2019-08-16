@@ -81,6 +81,6 @@
     "eslint-config-cozy-app": "1.2.0",
     "eslint-plugin-prettier": "3.1.0",
     "husky": "2.7.0",
-    "jest": "24.8.0"
+    "jest": "24.9.0"
   }
 }
