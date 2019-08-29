@@ -33,21 +33,20 @@ export const hasCmd = (path, cmd) => {
 }
 
 export const launchCmd = async (path, params, spinnerMsg) => {
-  return new Promise(async resolve => {
-    const Spinner = CLI.Spinner
-    const status = new Spinner(spinnerMsg)
+  const Spinner = CLI.Spinner
+  const status = new Spinner(spinnerMsg)
 
-    if (isInteractive()) {
-      status.start()
-    } else {
-      console.log(` ${spinnerMsg}`)
-    }
+  if (isInteractive()) {
+    status.start()
+  } else {
+    console.log(` ${spinnerMsg}`)
+  }
 
-    const result = { stdout: [], stderr: [] }
-    const cmd = await spawn('yarn', params, { cwd: path, encoding: 'utf8' })
-    cmd.stdout.on('data', data => result.stdout.push(data.toString()))
-    cmd.stderr.on('data', data => result.stderr.push(data))
-
+  const result = { stdout: [], stderr: [] }
+  const cmd = await spawn('yarn', params, { cwd: path, encoding: 'utf8' })
+  cmd.stdout.on('data', data => result.stdout.push(data.toString()))
+  cmd.stderr.on('data', data => result.stderr.push(data))
+  return new Promise(resolve => {
     cmd.on('close', code => {
       result.code = code
       if (isInteractive()) status.stop()
