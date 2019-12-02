@@ -69,7 +69,7 @@
     "lodash": "4.17.15",
     "mkdirp": "0.5.1",
     "request": "2.88.0",
-    "request-promise": "4.2.4",
+    "request-promise": "4.2.5",
     "simple-git": "1.126.0",
     "yargs": "14.2.2"
   },
