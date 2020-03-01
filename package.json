@@ -63,7 +63,7 @@
     "figlet": "1.2.4",
     "fs-extra": "8.1.0",
     "git-url-parse": "11.1.2",
-    "inquirer": "7.0.4",
+    "inquirer": "7.0.5",
     "js-yaml": "3.13.1",
     "json5": "2.1.1",
     "lodash": "4.17.15",
