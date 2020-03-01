@@ -68,7 +68,7 @@
     "json5": "2.1.1",
     "lodash": "4.17.15",
     "mkdirp": "1.0.3",
-    "request": "2.88.0",
+    "request": "2.88.2",
     "request-promise": "4.2.5",
     "simple-git": "1.131.0",
     "yargs": "15.1.0"
