@@ -67,7 +67,7 @@
     "js-yaml": "3.13.1",
     "json5": "2.1.2",
     "lodash": "4.17.15",
-    "mkdirp": "1.0.3",
+    "mkdirp": "1.0.4",
     "request": "2.88.2",
     "request-promise": "4.2.5",
     "simple-git": "1.132.0",
