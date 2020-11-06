@@ -71,7 +71,7 @@
     "request": "2.88.2",
     "request-promise": "4.2.6",
     "simple-git": "1.132.0",
-    "yargs": "15.4.1"
+    "yargs": "16.1.0"
   },
   "devDependencies": {
     "babel-cli": "6.26.0",
