@@ -70,7 +70,7 @@
     "mkdirp": "1.0.4",
     "request": "2.88.2",
     "request-promise": "4.2.6",
-    "simple-git": "2.24.0",
+    "simple-git": "2.32.0",
     "yargs": "16.1.1"
   },
   "devDependencies": {
