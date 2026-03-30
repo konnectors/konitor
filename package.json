@@ -65,7 +65,7 @@
     "git-url-parse": "11.6.0",
     "inquirer": "8.2.0",
     "js-yaml": "4.1.0",
-    "json5": "2.2.0",
+    "json5": "2.2.2",
     "lodash": "4.17.21",
     "mkdirp": "1.0.4",
     "request": "2.88.2",
